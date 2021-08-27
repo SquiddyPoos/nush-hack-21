@@ -4,5 +4,5 @@ module Hackathon2021 {
     requires javafx.fxml;
     requires javafx.graphics;
     requires javafx.media;
-    opens app.Controller;
+    opens application;
 }
