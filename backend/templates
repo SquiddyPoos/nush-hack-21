@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+    </head>
+    <body>
+    <div id="map" style="height: 800px; width: 100%;"></div>
+        <script>
+            function initMap() {
+                map = new google.maps.Map(document.getElementById('map'), {
+                    center: {lat: {{ start[0] or 1.3070338700892987 }}, lng: {{ start[1] or 103.77010578611481 }}},
+                    zoom: 16
+                });
+                evmarker = {
+                    path: "M10.453 14.016l6.563-6.609-1.406-1.406-5.156 5.203-2.063-2.109-1.406 1.406zM12 2.016q2.906 0 4.945 2.039t2.039 4.945q0 1.453-0.727 3.328t-1.758 3.516-2.039 3.070-1.711 2.273l-0.75 0.797q-0.281-0.328-0.75-0.867t-1.688-2.156-2.133-3.141-1.664-3.445-0.75-3.375q0-2.906 2.039-4.945t4.945-2.039z",
+                    fillColor: "blue",
+                    fillOpacity: 0.6,
+                    strokeWeight: 0,
+                    rotation: 0,
+                    scale: 2,
+                    anchor: new google.maps.Point(15, 30),
+                    labelOrigin: new google.maps.Point(35, 10)
+                };
+                {% for latlong in markers %}
+                new google.maps.Marker({
+                    position: { lat: {{ latlong[0] }}, lng: {{ latlong[1] }}},
+                    map: map,
+                    label: "Charging",
+                    icon: evmarker
+                });
+                {% endfor %}
+                marker = {
+                    path: "M 10.453 14.016 z M 12 2.016 q 2.906 0 4.945 2.039 t 2.039 4.945 q 0 1.453 -0.727 3.328 t -1.758 3.516 t -2.039 3.07 t -1.711 2.273 l -0.75 0.797 q -0.281 -0.328 -0.75 -0.867 t -1.688 -2.156 t -2.133 -3.141 t -1.664 -3.445 t -0.75 -3.375 q 0 -2.906 2.039 -4.945 t 4.945 -2.039 z",
+                    fillColor: "green",
+                    fillOpacity: 0.6,
+                    strokeWeight: 0,
+                    rotation: 0,
+                    scale: 2,
+                    anchor: new google.maps.Point(15, 30),
+                    labelOrigin: new google.maps.Point(30, 10)
+                }
+                {% if start %}
+                new google.maps.Marker({
+                    position: { lat: {{ start[0] }}, lng: {{ start[1] }}},
+                    map: map,
+                    label: "Start",
+                    icon: marker
+                });
+                {% endif %}
+                {% if end %}
+                new google.maps.Marker({
+                    position: { lat: {{ end[0] }}, lng: {{ end[1] }}},
+                    map: map,
+                    label: "End",
+                    icon: marker
+                });
+                {% endif %}
+            }
+        </script>
+        <script src="https://maps.googleapis.com/maps/api/js?key={{ API_KEY }}&callback=initMap" async ></script>
+    </body>
+</html>
