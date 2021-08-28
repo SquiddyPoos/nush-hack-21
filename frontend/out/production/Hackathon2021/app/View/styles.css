@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'Electro Shackle';
+    src: url('/app/res/fonts/zekton_rg.ttf');
+}
+
+
+#welcome {
+    -fx-font-family: "Electro Shackle";
+}
