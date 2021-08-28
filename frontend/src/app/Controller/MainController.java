@@ -224,8 +224,9 @@ public class MainController implements Initializable {
                             URL, URLEncoder.encode("r3aw4g6es5rdhufymgihjgfbdvsefg5rhdtu", StandardCharsets.UTF_8),
                             URLEncoder.encode(this.eLoc.getText(), StandardCharsets.UTF_8));
                     String result = makeRequest(finalUrl, false);
+                    List<String> pos = Arrays.stream(result.split("[]\\[]")[1].split("\",\"")).toList();
                     SortedSet<String> places = new TreeSet<>();
-                    places.addAll(Arrays.stream(result.split("[\\]\\[]")[1].split("\",\"")).toList());
+                    pos.forEach(s -> places.add(s.replaceAll("\"", "")));
                     this.eLoc.setEntries(places);
                 } catch (MalformedURLException malformedURLException) {
                     Text text = new Text("URL invalid!");
@@ -247,8 +248,9 @@ public class MainController implements Initializable {
                             URL, URLEncoder.encode("r3aw4g6es5rdhufymgihjgfbdvsefg5rhdtu", StandardCharsets.UTF_8),
                             URLEncoder.encode(this.yourLoc.getText(), StandardCharsets.UTF_8));
                     String result = makeRequest(finalUrl, false);
+                    List<String> pos = Arrays.stream(result.split("[]\\[]")[1].split("\",\"")).toList();
                     SortedSet<String> places = new TreeSet<>();
-                    places.addAll(Arrays.stream(result.split("[\\]\\[]")[1].split("\",\"")).toList());
+                    pos.forEach(s -> places.add(s.replaceAll("\"", "")));
                     this.yourLoc.setEntries(places);
                 } catch (MalformedURLException malformedURLException) {
                     Text text = new Text("URL invalid!");
@@ -291,12 +293,12 @@ public class MainController implements Initializable {
 
     public static void setStartLoc(String who) {
         if (who.equals("sLoc") || who.equals("eLoc")) {
-            String finalUrl = String.format("%s?pass=%s&loc=%s",
+            String finalUrl = String.format("%s?pass=%s&sLoc=%s",
                     "https://hack21.squiddy.me/maps/", URLEncoder.encode("r3aw4g6es5rdhufymgihjgfbdvsefg5rhdtu", StandardCharsets.UTF_8),
                     URLEncoder.encode(sLocStatic.getText(), StandardCharsets.UTF_8));
             webViewStatic.getEngine().load(finalUrl);
         } else {
-            String finalUrl = String.format("%s?pass=%s&loc=%s",
+            String finalUrl = String.format("%s?pass=%s&sLoc=%s",
                     "https://hack21.squiddy.me/maps/", URLEncoder.encode("r3aw4g6es5rdhufymgihjgfbdvsefg5rhdtu", StandardCharsets.UTF_8),
                     URLEncoder.encode(yourLocStatic.getText(), StandardCharsets.UTF_8));
             webViewStatic1.getEngine().load(finalUrl);
