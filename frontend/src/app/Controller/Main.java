@@ -21,6 +21,15 @@ public class Main extends Application {
         Parent root = loader.load();
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
+        
+        try {
+            primaryStage.getIcons().add(new Image(new FileInputStream("src/app/res/img/car2.png")));
+        } catch (FileNotFoundException e) {
+            Text text = new Text("File not found!");
+            text.setWrappingWidth(250);
+            text.setFont(new Font(20));
+            new Toast().makeText(text, 3000);
+        }
 
 //        MainController.printPascal(15);
     }
