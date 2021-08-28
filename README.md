@@ -1,4 +1,4 @@
 # Flow
 
-- Frontend: JavaFX application\
+- Frontend: JavaFX application
 - Backend: Python (Flask) webserver for API
